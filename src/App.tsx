@@ -1,35 +1,72 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// import { useState } from "react";
+// import { ethers } from "ethers";
+// import { Button, TextField, Typography } from "@mui/material";
 
-function App() {
-  const [count, setCount] = useState(0)
+// const ERC20TokenAddress = "0x65a5ba240CBd7fD75700836b683ba95EBb2F32bd";
 
+// const App = () => {
+//   const [step, setStep] = useState(1);
+//   const [amount, setAmount] = useState("");
+//   const [address, setAddress] = useState("");
+//   const [message, setMessage] = useState("");
+
+//   const mintTokens = async () => {
+//     // Connect to the user's Ethereum wallet using MetaMask
+//     // Call the ERC20 token contract's mint function
+//     // Show a success message and proceed to the next step if the minting transaction is successful
+//     // Display an error message if the transaction fails
+//   };
+
+//   const transferTokens = async () => {
+//     // Call the ERC20 token contract's transfer function
+//     // Show a success message if the transfer transaction is successful
+//     // Display an error message if the transaction fails
+//   };
+
+//   return (
+//     <div>
+//       {step === 1 ? (
+//         <div>
+//           <TextField
+//             label="Amount"
+//             value={amount}
+//             onChange={(e) => setAmount(e.target.value)}
+//           />
+//           <Button onClick={mintTokens}>Mint Tokens</Button>
+//         </div>
+//       ) : (
+//         <div>
+//           <TextField
+//             label="Recipient Address"
+//             value={address}
+//             onChange={(e) => setAddress(e.target.value)}
+//           />
+//           <Button onClick={transferTokens}>Transfer Tokens</Button>
+//         </div>
+//       )}
+//       <Typography>{message}</Typography>
+//     </div>
+//   );
+// };
+
+// export default App;
+
+import "./App.global.css";
+import styles from "./App.module.css";
+
+import { Navigation } from "./components/Navigation";
+import { Display } from "./components/Display";
+import { MetaMaskError } from "./components/MetaMaskError";
+import { MetaMaskContextProvider } from "./hooks/useMetaMask";
+
+export const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <MetaMaskContextProvider>
+      <div className={styles.appContainer}>
+        <Navigation />
+        <Display />
+        <MetaMaskError />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
-
-export default App
+    </MetaMaskContextProvider>
+  );
+};
