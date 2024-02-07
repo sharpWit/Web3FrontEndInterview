@@ -1,14 +1,15 @@
+import { Button } from "@mui/material";
 import { useMetaMask } from "../../hooks/useMetaMask";
-import { formatAddress } from "../../utils/web3";
+import { formatAddress } from "../../utils";
 import styles from "./Navigation.module.css";
 
 export const Navigation = () => {
-  const { wallet, hasProvider, isConnecting, connectMetaMask } = useMetaMask();
+  const { wallet, hasProvider, isConnecting, connectWallet } = useMetaMask();
 
   return (
     <div className={styles.navigation}>
       <div className={styles.flexContainer}>
-        <div className={styles.leftNav}>Vite + React & MetaMask</div>
+        <div className={styles.leftNav}>Web3.0 React dApp & MetaMask</div>
         <div className={styles.rightNav}>
           {!hasProvider && (
             <a href="https://metamask.io" target="_blank" rel="noreferrer">
@@ -16,19 +17,21 @@ export const Navigation = () => {
             </a>
           )}
           {window.ethereum?.isMetaMask && wallet.accounts.length < 1 && (
-            <button disabled={isConnecting} onClick={connectMetaMask}>
+            <Button onClick={connectWallet} disabled={isConnecting}>
               Connect MetaMask
-            </button>
+            </Button>
           )}
           {hasProvider && wallet.accounts.length > 0 && (
             <a
               className="text_link tooltip-bottom"
-              href={`https://etherscan.io/address/${wallet}`}
+              href={`https://etherscan.io/address/${wallet.accounts}`}
               target="_blank"
               data-tooltip="Open in Block Explorer"
               rel="noreferrer"
             >
-              {formatAddress(wallet.accounts[0])}
+              {`Access to your blockchain data => ${formatAddress(
+                wallet.accounts[0]
+              )}`}
             </a>
           )}
         </div>

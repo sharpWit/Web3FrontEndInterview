@@ -1,5 +1,5 @@
 import { useMetaMask } from "../../hooks/useMetaMask";
-import { formatChainAsNum } from "../../utils/web3";
+import { formatChainAsNum } from "../../utils";
 import styles from "./Display.module.css";
 
 export const Display = () => {
